@@ -60,7 +60,7 @@ Controller → Service → Repository → Database
 ## 1️⃣ Cloner le projet
 
 ```bash
-git clone https://github.com/Rodrigue-NGUETSA/TacheAPI.git
+git clone https://github.com/Rodrigue-Duran/TacheAPI.git
 ````
 
 ---
