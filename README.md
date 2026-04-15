@@ -1,4 +1,3 @@
-````md
 # 🧩 TacheAPI
 
 ![.NET](https://img.shields.io/badge/.NET-10.0-blueviolet)
@@ -61,25 +60,15 @@ Controller → Service → Repository → Database
 
 ```bash
 git clone https://github.com/Rodrigue-Duran/TacheAPI.git
-````
-
----
+```
 
 ## 2️⃣ Aller dans le dossier du projet
 
-⚠️ Important : tu dois entrer dans le dossier qui contient le fichier `.csproj`
+⚠️ Tu dois être dans le dossier contenant le fichier `.csproj`
 
 ```bash
 cd TacheAPI
 ```
-
-Vérifie que tu vois bien :
-
-```
-TacheAPI.csproj
-```
-
----
 
 ## 3️⃣ Restaurer les dépendances
 
@@ -87,38 +76,28 @@ TacheAPI.csproj
 dotnet restore
 ```
 
----
-
 ## 4️⃣ Lancer l’application
 
 ```bash
 dotnet run
 ```
 
----
-
 ## 5️⃣ Accéder à Swagger
 
-Ouvre ton navigateur :
-
-```
 https://localhost:7117/swagger
-```
 
 ---
 
-# 🧠 Important à savoir
+# 🧠 Important
 
-* `dotnet run` doit être exécuté dans le dossier du `.csproj`
-* sinon tu auras l’erreur : *No project to run found*
+- `dotnet run` doit être exécuté dans le dossier du `.csproj`
+- sinon erreur : No project to run found
 
 ---
 
 # 🧪 Tester l’API
 
-## 🟢 Créer une tâche
-
-POST `/api/Tache`
+## POST /api/Tache
 
 ```json
 {
@@ -130,35 +109,15 @@ POST `/api/Tache`
 }
 ```
 
----
+## GET /api/Tache
 
-## 🔵 Voir toutes les tâches
+## GET /api/Tache/{id}
 
-GET `/api/Tache`
+## PUT /api/Tache/{id}
 
----
+## DELETE /api/Tache/{id}
 
-## 🔵 Voir une tâche
-
-GET `/api/Tache/{id}`
-
----
-
-## 🟡 Modifier une tâche
-
-PUT `/api/Tache/{id}`
-
----
-
-## 🔴 Supprimer une tâche
-
-DELETE `/api/Tache/{id}`
-
----
-
-## 🟣 Terminer une tâche
-
-POST `/api/Tache/{id}/finish`
+## POST /api/Tache/{id}/finish
 
 ---
 
@@ -179,29 +138,26 @@ POST `/api/Tache/{id}/finish`
 
 # 📌 Statuts
 
-| Statut   | Valeur |
-| -------- | ------ |
-| Creee    | 0      |
-| Terminee | 1      |
+| Statut | Valeur |
+|--------|--------|
+| Creee | 0 |
+| Terminee | 1 |
 
 ---
 
 # 📖 Swagger
 
-Documentation disponible ici :
-
-[https://localhost:7117/swagger](https://localhost:7117/swagger)
+https://localhost:7117/swagger
 
 ---
 
 # 🚀 Améliorations futures
 
-* Authentification JWT
-* DTOs
-* Pagination
-* Filtrage avancé
-* Logging
-* Déploiement cloud
+- JWT Authentication
+- DTOs
+- Pagination
+- Logging
+- Déploiement cloud
 
 ---
 
@@ -210,6 +166,3 @@ Documentation disponible ici :
 Rodrigue NGUETSA
 
 💡 Apprendre en construisant, progresser en pratiquant.
-
-```
-```
