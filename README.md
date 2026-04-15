@@ -1,168 +1,132 @@
+
+-----
+
 # 🧩 TacheAPI
 
-![.NET](https://img.shields.io/badge/.NET-10.0-blueviolet)
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-Web_API-512BD4)
-![Entity Framework Core](https://img.shields.io/badge/EF_Core-ORM-green)
-![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)
-![Status](https://img.shields.io/badge/status-active-success)
+## 📌 Présentation
 
----
+**TacheAPI** est une API REST de gestion de tâches développée avec **ASP.NET Core**. Elle permet de gérer le cycle de vie complet d'une tâche de manière intuitive.
 
-# 📌 Présentation
+> **Workflow :** Création ➜ Consultation ➜ Modification ➜ Finalisation ➜ Suppression
 
-TacheAPI est une API REST de gestion de tâches développée avec ASP.NET Core.
+-----
 
-Elle permet de gérer le cycle complet d’une tâche :
+## 🎯 Objectifs du projet
 
-👉 création → consultation → modification → finalisation → suppression
+Ce projet a été conçu pour mettre en pratique les concepts suivants :
 
----
+  * **ASP.NET Core Web API** (Routing, Dependency Injection)
+  * **Entity Framework Core** (Code First)
+  * **Architecture en couches** (Controller / Service / Repository)
+  * **Persistance de données** avec SQLite
 
-# 🎯 Objectif du projet
+-----
 
-Ce projet a été réalisé dans un but d’apprentissage afin de maîtriser :
+## ⚙️ Fonctionnalités
 
-- ASP.NET Core Web API
-- Entity Framework Core
-- Architecture en couches (Controller / Service / Repository)
-- Gestion d’une base de données SQLite
+  * ✅ Créer une tâche
+  * ✅ Lister toutes les tâches
+  * ✅ Récupérer une tâche par son ID
+  * ✅ Modifier les informations d'une tâche
+  * ✅ Supprimer une tâche
+  * ✅ Marquer une tâche comme terminée (Endpoint dédié)
 
----
+-----
 
-# ⚙️ Fonctionnalités
+## 🧠 Architecture & Base de données
 
-✔ Créer une tâche  
-✔ Récupérer toutes les tâches  
-✔ Récupérer une tâche par ID  
-✔ Modifier une tâche  
-✔ Supprimer une tâche  
-✔ Marquer une tâche comme terminée  
+### Flux de données
 
----
+`Controller` ➜ `Service` ➜ `Repository` ➜ `Database`
 
-# 🧠 Architecture
+### Détails techniques
 
-Controller → Service → Repository → Database
+  * **Type :** SQLite
+  * **Fichier :** `taches.db`
+  * **Initialisation :** La base est créée automatiquement via EF Core lors du premier lancement.
 
----
+-----
 
-# 🗄️ Base de données
+## 🚀 Installation et exécution
 
-- Type : SQLite  
-- Fichier : `taches.db`  
-- Créée automatiquement via Entity Framework Core
-
----
-
-# 🚀 Installation et exécution
-
-## 1️⃣ Cloner le projet
+### 1\. Cloner le projet
 
 ```bash
 git clone https://github.com/Rodrigue-Duran/TacheAPI.git
 ```
 
-## 2️⃣ Aller dans le dossier du projet
+### 2\. Accéder au répertoire
 
-⚠️ Tu dois être dans le dossier contenant le fichier `.csproj`
+> [\!IMPORTANT]
+> Vous devez vous situer dans le dossier contenant le fichier `.csproj`.
 
 ```bash
 cd TacheAPI
 ```
 
-## 3️⃣ Restaurer les dépendances
+### 3\. Restaurer et lancer
 
 ```bash
 dotnet restore
-```
-
-## 4️⃣ Lancer l’application
-
-```bash
 dotnet run
 ```
 
-## 5️⃣ Accéder à Swagger
+### 4\. Accéder à l'interface
 
-https://localhost:7117/swagger
+Une fois l'application lancée, ouvrez votre navigateur à l'adresse suivante :
+👉 [https://localhost:7117/swagger](https://www.google.com/search?q=https://localhost:7117/swagger)
 
----
+-----
 
-# 🧠 Important
+## 🧪 Documentation de l'API (Endpoints)
 
-- `dotnet run` doit être exécuté dans le dossier du `.csproj`
-- sinon erreur : No project to run found
+| Méthode | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/Tache` | Récupérer toutes les tâches |
+| `GET` | `/api/Tache/{id}` | Récupérer une tâche spécifique |
+| `POST` | `/api/Tache` | Créer une nouvelle tâche |
+| `PUT` | `/api/Tache/{id}` | Mettre à jour une tâche |
+| `DELETE` | `/api/Tache/{id}` | Supprimer une tâche |
+| `POST` | `/api/Tache/{id}/finish` | Clôturer une tâche |
 
----
-
-# 🧪 Tester l’API
-
-## POST /api/Tache
+### Exemple de corps de requête (POST/PUT)
 
 ```json
 {
   "titre": "Apprendre ASP.NET Core",
   "description": "Construire une API REST",
   "statut": 0,
-  "dateDeCreation": "2026-04-15T10:00:00",
-  "dateDeFin": null
+  "dateDeCreation": "2026-04-15T10:00:00"
 }
 ```
 
-## GET /api/Tache
+-----
 
-## GET /api/Tache/{id}
+## 📦 Modèle de données & Statuts
 
-## PUT /api/Tache/{id}
+**Objet Tâche :**
 
-## DELETE /api/Tache/{id}
+  * `id` (int)
+  * `titre` (string)
+  * `description` (string)
+  * `statut` (int) : `0` = Créée, `1` = Terminée
+  * `dateDeCreation` (DateTime)
+  * `dateDeFin` (DateTime?)
 
-## POST /api/Tache/{id}/finish
+-----
 
----
+## 🚀 Améliorations futures
 
-# 📦 Modèle de données
+  * [ ] Implémentation de l'authentification **JWT**
+  * [ ] Utilisation de **DTOs** (Data Transfer Objects) pour isoler le modèle
+  * [ ] Ajout de la **Pagination** et de filtres
+  * [ ] Mise en place de **Logging** (Serilog)
+  * [ ] Déploiement Cloud (Azure/AWS)
 
-```json
-{
-  "id": 1,
-  "titre": "string",
-  "description": "string",
-  "statut": 0,
-  "dateDeCreation": "2026-04-15T10:00:00",
-  "dateDeFin": null
-}
-```
+-----
 
----
+## 👤 Auteur
 
-# 📌 Statuts
+**Rodrigue NGUETSA**
 
-| Statut | Valeur |
-|--------|--------|
-| Creee | 0 |
-| Terminee | 1 |
-
----
-
-# 📖 Swagger
-
-https://localhost:7117/swagger
-
----
-
-# 🚀 Améliorations futures
-
-- JWT Authentication
-- DTOs
-- Pagination
-- Logging
-- Déploiement cloud
-
----
-
-# 👤 Auteur
-
-Rodrigue NGUETSA
-
-💡 Apprendre en construisant, progresser en pratiquant.
+> "Apprendre en construisant, progresser en pratiquant."
