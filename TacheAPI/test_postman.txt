@@ -1,0 +1,223 @@
+Parfait 👌 là on va transformer ton controller en **plan de test Postman prêt à exécuter** comme une checklist de labo 🧪⚙️
+
+Ton API ASP.NET Core Web API expose 6 endpoints → donc 6 familles de tests.
+
+---
+
+# 🌐 BASE URL
+
+Si tu es en local :
+
+```text id="base1"
+https://localhost:xxxx/api/Tache
+```
+
+(remplace `xxxx` par ton port)
+
+---
+
+# 🧪 1. CREATE TÂCHE
+
+## ➕ POST `/api/Tache`
+
+### 📥 Body (JSON)
+
+```json id="create1"
+{
+  "titre": "Faire les migrations",
+  "description": "Comprendre EF Core",
+  "statut": 0,
+  "dateDeCreation": "2026-04-15T10:00:00",
+  "dateDeFin": null
+}
+```
+
+### ✅ Attendu
+
+* Status : **201 Created**
+* Retour : objet avec `id`
+
+### ❌ Test erreur
+
+* Body vide → **400 BadRequest**
+
+---
+
+# 🧪 2. GET ALL TÂCHES
+
+## 📄 GET `/api/Tache`
+
+### ✅ Attendu
+
+* Status : **200 OK**
+* Retour :
+
+```json
+[
+  { ... },
+  { ... }
+]
+```
+
+---
+
+# 🧪 3. GET BY ID
+
+## 🔍 GET `/api/Tache/1`
+
+### Cas OK
+
+* ID existe → **200 OK**
+
+### Cas erreur
+
+| Cas           | Résultat       |
+| ------------- | -------------- |
+| id = 0        | 400 BadRequest |
+| id = -5       | 400 BadRequest |
+| id inexistant | 404 NotFound   |
+
+---
+
+# 🧪 4. UPDATE TÂCHE
+
+## ✏️ PUT `/api/Tache/1`
+
+### 📥 Body
+
+```json id="update1"
+{
+  "id": 1,
+  "titre": "Tâche modifiée",
+  "description": "Update test",
+  "statut": 0,
+  "dateDeCreation": "2026-04-15T10:00:00",
+  "dateDeFin": null
+}
+```
+
+### ✅ Attendu
+
+* **204 NoContent**
+
+### ❌ Tests erreurs
+
+| Cas              | Résultat       |
+| ---------------- | -------------- |
+| id URL ≠ id body | 400 BadRequest |
+| id ≤ 0           | 400 BadRequest |
+| id inexistant    | 404 NotFound   |
+
+---
+
+# 🧪 5. DELETE TÂCHE
+
+## 🗑 DELETE `/api/Tache/1`
+
+### ✅ Attendu
+
+* **204 NoContent**
+
+### ❌ Cas erreurs
+
+| Cas           | Résultat       |
+| ------------- | -------------- |
+| id ≤ 0        | 400 BadRequest |
+| id inexistant | 404 NotFound   |
+
+---
+
+# 🧪 6. FINIR UNE TÂCHE
+
+## 🎯 POST `/api/Tache/1/finish`
+
+### ✅ Attendu
+
+* **204 NoContent**
+
+### ❌ Cas erreurs
+
+| Cas           | Résultat       |
+| ------------- | -------------- |
+| id ≤ 0        | 400 BadRequest |
+| id inexistant | 404 NotFound   |
+
+---
+
+# 🧠 CHECKLIST POSTMAN (résumé rapide)
+
+## ✔ Tests normaux
+
+* Create task
+* Get all tasks
+* Get by id
+* Update task
+* Delete task
+* Finish task
+
+---
+
+## ❌ Tests d’erreurs (très important)
+
+Tu dois aussi tester :
+
+### 1. ID invalide
+
+```text id="err1"
+GET /api/Tache/0
+GET /api/Tache/-1
+```
+
+### 2. Body invalide
+
+```text id="err2"
+POST /api/Tache (body vide)
+```
+
+### 3. ID mismatch
+
+```text id="err3"
+PUT /api/Tache/2 avec body id = 1
+```
+
+---
+
+# 🔥 BONUS (niveau pro)
+
+Ajoute dans Postman :
+
+### 🟢 Collection variables
+
+```text id="var1"
+baseUrl = https://localhost:xxxx/api/Tache
+```
+
+Et tu écris :
+
+```text id="var2"
+{{baseUrl}}/1
+```
+
+---
+
+# 🎯 Conclusion
+
+Ton API est déjà bien structurée 👍
+
+Tu as :
+
+* CRUD complet ✔
+* Action métier (`finish`) ✔
+* gestion des erreurs ✔
+
+---
+
+# 🧠 Si tu veux aller plus loin
+
+Je peux t’aider à :
+
+🔥 automatiser ces tests avec Postman Collection
+🔥 ou transformer ça en tests unitaires (xUnit)
+🔥 ou améliorer ton API (DTO + validation propre)
+
+Dis-moi 👍
