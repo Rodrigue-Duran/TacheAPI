@@ -1,78 +1,95 @@
- **README.md complet, orienté “utilisateur + recruteur”** 👇
-
----
-
 ````md
 # 🧩 TacheAPI
 
 ![.NET](https://img.shields.io/badge/.NET-10.0-blueviolet)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-Web_API-512BD4)
-![EF Core](https://img.shields.io/badge/Entity_Framework-Core-green)
+![Entity Framework Core](https://img.shields.io/badge/EF_Core-ORM-green)
 ![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)
 ![Status](https://img.shields.io/badge/status-active-success)
 
 ---
 
-# 📌 Présentation de l’application
+# 📌 Présentation
 
-**TacheAPI** est une application backend permettant de gérer des tâches.
+TacheAPI est une API REST de gestion de tâches développée avec ASP.NET Core.
 
-Elle permet de :
-- créer des tâches
-- consulter les tâches
-- modifier des tâches
-- supprimer des tâches
-- marquer une tâche comme terminée
+Elle permet de gérer le cycle complet d’une tâche :
 
-Chaque tâche suit un cycle de vie simple :  
-👉 création → modification → finalisation → suppression
+👉 création → consultation → modification → finalisation → suppression
 
 ---
 
-# 👤 À qui s’adresse ce projet ?
+# 🎯 Objectif du projet
 
-- Développeurs débutants en backend
-- Étudiants en apprentissage ASP.NET Core
-- Toute personne voulant comprendre une API REST simple
+Ce projet a été réalisé dans un but d’apprentissage afin de maîtriser :
 
----
-
-# ⚙️ Fonctionnalités principales
-
-✔ Création de tâches  
-✔ Liste des tâches  
-✔ Détail d’une tâche  
-✔ Mise à jour  
-✔ Suppression  
-✔ Finalisation d’une tâche  
+- ASP.NET Core Web API
+- Entity Framework Core
+- Architecture en couches (Controller / Service / Repository)
+- Gestion d’une base de données SQLite
 
 ---
 
-# 🧠 Comment fonctionne l’application ?
+# ⚙️ Fonctionnalités
 
-L’application est une API REST.
-
-👉 Cela signifie qu’elle ne possède pas d’interface graphique propre  
-👉 Elle est utilisée via des outils comme :
-
-- Swagger
-- Postman
-- ou une application frontend
+✔ Créer une tâche  
+✔ Récupérer toutes les tâches  
+✔ Récupérer une tâche par ID  
+✔ Modifier une tâche  
+✔ Supprimer une tâche  
+✔ Marquer une tâche comme terminée  
 
 ---
 
-# 🚀 Comment utiliser l’application ?
+# 🧠 Architecture
 
-## 1️⃣ Lancer le projet
+Controller → Service → Repository → Database
 
-Clone le projet :
+---
+
+# 🗄️ Base de données
+
+- Type : SQLite  
+- Fichier : `taches.db`  
+- Créée automatiquement via Entity Framework Core
+
+---
+
+# 🚀 Installation et exécution
+
+## 1️⃣ Cloner le projet
 
 ```bash
-git clone https://github.com/ton-repo/TacheAPI.git
-cd TacheAPI
+git clone https://github.com/Rodrigue-NGUETSA/TacheAPI.git
 ````
 
-Lancer l’API :
+---
+
+## 2️⃣ Aller dans le dossier du projet
+
+⚠️ Important : tu dois entrer dans le dossier qui contient le fichier `.csproj`
+
+```bash
+cd TacheAPI
+```
+
+Vérifie que tu vois bien :
+
+```
+TacheAPI.csproj
+```
+
+---
+
+## 3️⃣ Restaurer les dépendances
+
+```bash
+dotnet restore
+```
+
+---
+
+## 4️⃣ Lancer l’application
 
 ```bash
 dotnet run
@@ -80,75 +97,68 @@ dotnet run
 
 ---
 
-## 2️⃣ Ouvrir l’API
+## 5️⃣ Accéder à Swagger
 
-Une fois lancée, ouvre ton navigateur :
+Ouvre ton navigateur :
 
-```text
+```
 https://localhost:7117/swagger
 ```
 
-👉 C’est l’interface de test de l’API
+---
+
+# 🧠 Important à savoir
+
+* `dotnet run` doit être exécuté dans le dossier du `.csproj`
+* sinon tu auras l’erreur : *No project to run found*
 
 ---
 
-# 🧪 Tester l’API (GUIDE SIMPLE)
+# 🧪 Tester l’API
 
 ## 🟢 Créer une tâche
 
-* Clique sur `POST /Tache`
-* Clique sur **Try it out**
-* Remplis :
+POST `/api/Tache`
 
 ```json
 {
-  "titre": "Apprendre ASP.NET",
-  "description": "Comprendre les API REST",
+  "titre": "Apprendre ASP.NET Core",
+  "description": "Construire une API REST",
   "statut": 0,
   "dateDeCreation": "2026-04-15T10:00:00",
   "dateDeFin": null
 }
 ```
 
-* Clique **Execute**
-
 ---
 
 ## 🔵 Voir toutes les tâches
 
-* Clique sur `GET /Tache`
-* Clique **Execute**
+GET `/api/Tache`
 
 ---
 
 ## 🔵 Voir une tâche
 
-* Clique sur `GET /Tache/{id}`
-* Mets un id (ex: 1)
-* Clique Execute
+GET `/api/Tache/{id}`
 
 ---
 
 ## 🟡 Modifier une tâche
 
-* Clique sur `PUT /Tache/{id}`
-* Modifie les champs
+PUT `/api/Tache/{id}`
 
 ---
 
 ## 🔴 Supprimer une tâche
 
-* Clique sur `DELETE /Tache/{id}`
+DELETE `/api/Tache/{id}`
 
 ---
 
 ## 🟣 Terminer une tâche
 
-* Clique sur :
-
-```
-POST /Tache/{id}/finish
-```
+POST `/api/Tache/{id}/finish`
 
 ---
 
@@ -176,61 +186,30 @@ POST /Tache/{id}/finish
 
 ---
 
-# 🏗️ Architecture
+# 📖 Swagger
 
-L’application est construite en couches :
+Documentation disponible ici :
 
-```
-Controller → Service → Repository → Database
-```
+[https://localhost:7117/swagger](https://localhost:7117/swagger)
 
 ---
 
-# 🗄️ Base de données
-
-* SQLite
-* fichier : `taches.db`
-* générée automatiquement via Entity Framework
-
----
-
-# 📖 Documentation API
-
-L’API est documentée automatiquement via Swagger :
-
-👉 `/swagger`
-
----
-
-# 🚧 Améliorations futures
+# 🚀 Améliorations futures
 
 * Authentification JWT
-* Pagination
-* Filtrage des tâches
 * DTOs
-* Logs
+* Pagination
+* Filtrage avancé
+* Logging
 * Déploiement cloud
 
 ---
 
-# 👨‍💻 Auteur
+# 👤 Auteur
 
-Projet réalisé dans un but d’apprentissage backend avec ASP.NET Core.
+Rodrigue NGUETSA
 
-💡 “Apprendre en construisant, progresser en pratiquant.”
+💡 Apprendre en construisant, progresser en pratiquant.
 
 ```
-
----
-
-# 🧠 Ce que tu viens d’obtenir
-
-✔ README orienté utilisateur  
-✔ guide d’utilisation simple  
-✔ guide technique  
-✔ guide test Swagger  
-✔ prêt GitHub / portfolio  
-
----
-
-
+```
